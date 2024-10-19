@@ -13,17 +13,22 @@ export default function Homepage() {
   useEffect(() => {
     async function getArticles() {
       setLoading(true);
-      const response = await axios.get(`https://mockend.com/pavanmg007/react-blog/posts?limit=10`);
-      if (response.status === 200) {
-        setData(response.data);
-        // setData(response.data);
-        setLoading(false);
-      } else if (response.status === 500) {
-        setLoading(false);
-      } else {
-        console.log("API error");
-        setLoading(true);
+      try{
+        const response = await axios.get(`https://mockend.com/pavanmg007/react-blog/posts?limit=10`);
+        if (response.status === 200) {
+          setData(response.data);
+          // setData(response.data);
+          setLoading(false);
+        } else if (response.status === 500) {
+          setLoading(false);
+        } else {
+          console.log("API error");
+          setLoading(true);
+        }
+      }catch(e){
+        
       }
+      
     }
     getArticles();
   }, [categoryid]);

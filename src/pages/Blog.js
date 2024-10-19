@@ -16,17 +16,22 @@ export default function Blog() {
     setPage((page) => page + 1);
     async function loadArticles() {
       setLoadMore(true);
-      const response = await axios.get(
-        `https://mockend.com/pavanmg007/react-blog/posts?offset=${page}&limit=3&category_eq=${categoryid}`
-      );
-      if (response.status === 200) {
-        setData((data) => [...response.data, ...data]);
-        // setData(response.data);
-        setLoadMore(false);
-      } else {
-        console.log("API error");
-        setLoadMore(true);
+      try{
+        const response = await axios.get(
+          `https://mockend.com/pavanmg007/react-blog/posts?offset=${page}&limit=3&category_eq=${categoryid}`
+        );
+        if (response.status === 200) {
+          setData((data) => [...response.data, ...data]);
+          // setData(response.data);
+          setLoadMore(false);
+        } else {
+          console.log("API error");
+          setLoadMore(true);
+        }
+      }catch(e){
+
       }
+     
     }
     loadArticles();
   };
@@ -34,17 +39,20 @@ export default function Blog() {
   useEffect(() => {
     async function getArticles() {
       setLoading(true);
-      const response = await axios.get(
-        `https://mockend.com/pavanmg007/react-blog/posts?offset=1&limit=3&category_eq=${categoryid}`
-      );
-      if (response.status === 200) {
-        setData((data) => [...response.data, ...data]);
-        // setData(response.data);
-        setLoading(false);
-      } else {
-        console.log("API error");
-        setLoading(true);
-      }
+      try{
+        const response = await axios.get(
+          `https://mockend.com/pavanmg007/react-blog/posts?offset=1&limit=3&category_eq=${categoryid}`
+        );
+        if (response.status === 200) {
+          setData((data) => [...response.data, ...data]);
+          // setData(response.data);
+          setLoading(false);
+        } else {
+          console.log("API error");
+          setLoading(true);
+        }
+      }catch(e){}
+      
     }
     getArticles();
   }, [categoryid]);
