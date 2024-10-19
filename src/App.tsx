@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Blog from "./pages/Blog";
 import SingleBlog from "./pages/SingleBlog";
